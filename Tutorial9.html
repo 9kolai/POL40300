@@ -1,0 +1,669 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>POL40300: Tutorial 9</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+		<link rel="stylesheet" href="css/reveal-override.css"/>
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/vs.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<style>
+			kbd {
+				font-family: Arial, sans-serif;
+				font-size: 1rem;
+				padding: 0 .25rem 0 .25rem;
+				border: solid 1px grey;
+				border-radius: 4px;
+				background-color: #f0f0f0;
+				box-shadow: 2px 2px 2px 2px silver;
+			}
+		</style>
+	</head>
+	<body>
+		<header><img src="pic/LogoMainBlue2.png" style="width:100% "></header>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background="pic/BGMainBlue.gif" style="color:white">
+					<h1  style="color:white">POL40300: Computational Methods</h1>
+					<p>Tutorial 9 by Nikolai Gad</p>
+					<p>München, 12. December 2019</p>
+				</section>
+				<section>
+					<h3 style="color: rgb(0,101,189)">Today's lecture </h3>
+					<ul>
+						<li>Last week's exercise </li>
+						<li>Facebook study: GDPR and ethics </li>
+						<li>Other cases </li>
+						<li>Small R exercise </li>
+						
+					</ul>
+				</section>
+				
+				
+				<section>
+					<h3>Workflow in Quanteda </h3>
+					<section>
+						<h3 style="color: rgb(0,101,189)">Workflow in Quanteda </h3>
+						
+					</section>
+				</section>
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)">A 61-million-person experiment in social influence and political mobilization. </h3>
+					<section>
+						<cite style="font-size: small; font-style: italic;">Bond, R. M., Fariss, C. J., Jones, J. J., Kramer, A. D. I., Marlow, C., Settle, J. E., & Fowler, J. H. (2012). A 61-million-person experiment in social influence and political mobilization. Nature, 489(7415), 295–298. https://doi.org/10.1038/nature11421</cite>
+						<p classs="fragment">Expreimental research design. </p>
+						<p class="fragment">Three randomly assigned groups: </p>
+						<ul>
+							<li class="fragment">A social message group (n=60.055.176)</li>
+							<li class="fragment">An informational message group (n=611.044)</li>
+							<li class="fragment">A control group (n=613.096)</li>
+						</ul>
+						<p class="fragment">Three dependent variables: </p>
+						<ul>
+							<li class="fragment">Clicking on "I voted" button: Political self-expression. </li>
+							<li class="fragment">Clicking on polling-place link: Information seeking. </li>
+							<li class="fragment">Publicly avialbe voting records: Actual turn-out. </li>
+						</ul>
+						<p class="fragment">For the last DV only 6.3m users were included and it was analysed on a group level. </p>
+					</section>
+					<section>
+						<h3>Results: </h3>
+						<ul>
+							<li class="fragment">Social message group 0,39% (P=0,02) more likely to vote than informational and control group. </li>
+							<li class="fragment">Social message group 2,08% more likely to click "I voted" button than informational group. </li>
+							<li class="fragment">Social message group 0,26% more likely to seek information about polling station than informational group. </li>
+						</ul>
+					</section>
+					<section>
+						<p>Also test another hypothesis about the effect of seeing a friend share that they voted. </p>
+						<p class="fragment">Unit of analysis: Users who shared that they voted. </p>
+						<p class="fragment">DV's the same, but measured for each of the friends of user who shared that they voted. </p> 
+						<p class="fragment">IV: Strength of tie with friends (decile of user-friend interactions).  </p>
+					</section>
+					<section>
+						<img src="pic/tutorial9/60milFig2.jpg" style = "width: 60%"/>
+					</section>
+					<section>
+						<h3>Real-world effect (estimated) of the study </h3>
+						<p class="fragment">340.000 additional votes in 2010 midterm election, which corresponds to 0,14% of voting age population. </p>
+						<p class="fragment">Out of a general increase in turnout by 0,60% points from previous election (from 37,2% in 2006 to 37,8% in 2010) s</p>
+					</section>
+					<section>
+						<h3>Exercise I: Group work</h3>
+						<ul>
+							<li class="fragment">Would the study be covered by the GDPR at all? Why? </li>
+							<li class="fragment">Consider how you would design a study like this to live up to the 7 basic principles of the GDPR: </li>
+							<ul class="fragment">
+								<li>Lawful basis </li>
+								<ul>
+									<li>Consent </li>
+									<li>Perfomance of contract </li>
+									<li>To comply with legal obligation </li>
+									<li>Protecting vital interests of individuals </li>
+									<li>In the public interest </li>
+									<li>"legitimate interest" </li>
+								</ul>
+								<li>Purpose limitation </li>
+								<li>Data minimuzation </li>
+								<li>Accuracy </li>
+								<li>Storage limitation </li>
+								<li>Integrity and confidentiality </li>
+								<li>Accountability </li>
+							</ul>
+						</ul>
+					</section>
+					<section>
+						<h3>Exercise II: Group work </h3>
+						<p>In groups, consider one of the four ethical principles from the Belmont/Menlo report in regards to the 61mil study. Do you think they followed this principle? And if not, how can it be justified? </p>
+						<ul class="fragment">
+							<li>Respect for persons (consent) </li>
+							<li>Beneficience (benefifts vs. risks) </li>
+							<li>Justice (fair distribution of risks and benefits) </li>
+							<li>Respect for law and public interest (compliance and transparency-based accountability) </li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<h3 style="color: rgb(0,101,189)">Another example: Ad Delivery Algortihms on Facebook</h3>
+					<section>
+						<cite style="font-size: small; font-style: italic;">Ali, M., Sapiezynski, P., Korolova, A., Mislove, A., & Rieke, A. (2019). Ad Delivery Algorithms: The Hidden Arbiters of Political Messaging. ArXiv:1912.04255 [Cs]. Retrieved from http://arxiv.org/abs/1912.04255</cite>
+							<h3 class="fragment">Study whether it is harder to reach users who (tend to) disagree with with a message on Facebook than users who agrees. </h3>
+						<p class="fragment">Facebook provides various tools to target ads on their platform. But ads are then delivered to actual users based on an algortihm that takes price as well as "relevance" into consideration. </p>
+						<p class="fragment">This algorithm is not public though, so this paper tests which users are most likely to be shown political ads from two different candidates. </p>
+					</section>	
+					<section>
+						<ul>
+							<li class="fragment">Researchers run ads for Donald Trump and Bernie Sanders </li>
+							<li class="fragment">They attempt to target these ads to users who are less likely to vote for these candidates. </li>
+							<li class="fragment">Facebook reviews all ads (including the content they link to) before an ad is run. </li>
+							<li class="fragment">Study shows that "Facebook's ad delivery algorithms effectively differentiate the price of reaching a user based on their inferred political alignment with the advertised content, inhibiting political campaigns' ability to reach voters with diverse political views." </li>
+						</ul>
+					</section>
+					<section>
+						<h3>Ethics</h3>
+						<p>We consider the following actors: </p>
+						<ul>
+							<li class="fragment">Facebook - we avoid harming Facebook's business by following all their requirements for identifying ourselves and paying for the ads we're running</li>
+							<li class="fragment">politicians and companies whose images we use in our ads - we do not misrepresent them or their messages; instead we use their own wording and slogans and we give them free ads and traffic (all our ads lead to authentic and official webpages of the people or products we advertise); we don't expose them to the risk of being accused of discrimination since none of our ads are explicitly discriminatory</li>
+							<li class="fragment">people who see the ads - first, we don't waste their time by running misleading ads - when they click, they land on an appropriate webpage whose content corresponds to what's advertised. Second, we try to limit the outrage we cause - we select the least inflammatory political ads (though it's very difficult with Trump). </li>
+							<li class="fragment">people who _don't_ see the ads - in terms of the previous paper, we only ran real life opportunity ads once we were sure we had all the right apparatus to measure the delivery and calculate skew so that we wouldn't cause too much of actual discrimination (not exposing women to lucrative job ads, etc)</li>
+							<li class="fragment">democracy - as you pointed out, we picked politicians that had already spend millions of dollars in fb ads so our small contributions were unlikely to change anything. On top of that all ads are run in parallel for both political sides to further minimize any potential influence.</li>
+						</ul>
+						<p class="fragment">That's on the ethical side of things. On the legal side of things, we learnt that the ads we're running are considered political donations. We were not allowed to use grant or gift money on political advertising. Instead, all the ads were paid for from personal pockets of the American co-authors (I can't contribute to political parties in the US either), and for each ad they had to file a separate form to the Federal Electoral Commission.</p>
+					</section>
+				</section>
+				
+				
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)"></h3>
+				</section>
+				
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)">Privacy and the General Data Protection Regulation - recap</h3>
+					
+					<section>
+						<ul>
+							<li class="fragment">All processing of personal data (for EU residents).  </li>
+							<li class="fragment">Applies to <em>all</em> data collection: Public and private sectors as well as individuals.  </li>
+							<ul>
+								<li class="fragment">Data processing "by individual for purely personal reasons of for activities carried out in one's home" are exempted (). </li>
+								<li class="fragment">Specific excemptions and responsibilities specified for certain purposes. </li>
+								<li class="fragment">Special responsibilities for organisations with more than 250 employees. </li>
+							</ul>
+							<li class="fragment">No distinction between public and non-public data in GDPR, but might still matter (different interpretations). </li>
+						</ul>
+					</section>
+					<section>
+						<h3>Personal data: </h3>
+						<p class="fragment">Data relating to an identified or identifiable natural person. </p>
+						<p class="fragment">Anonymised data - in such a way that individuals are no longer identifiable AND the anonymisation is irreversible - is not considered personal data (but this level of anonymisation is often impossible to achieve). </p>
+					</section>
+					<section>
+						<h3>Seven basic principles </h3>
+						<p>Which also makes up a good check list. </p>
+						<ul>
+							<li class="fragment">Lawful basis </li>
+							<li class="fragment">Purpose limitation </li>
+							<li class="fragment">Data minimuzation </li>
+							<li class="fragment">Accuracy </li>
+							<li class="fragment">Storage limitation </li>
+							<li class="fragment">Integrity and confidentiality </li>
+							<li class="fragment">Accountability </li>
+						</ul>
+						<p class="fragment">Public vs. private data </p>
+					</section>
+					<section>
+						<h3>Legal basis for data processing </h3>
+						<p>(your justification for collecting and processing the data) </p>
+						<ol>
+							<li class="fragment">Consent </li>
+							<li class="fragment fade-in-then-semi-out">Perfomance of contract </li>
+							<li class="fragment fade-in-then-semi-out">To comply with legal obligation </li>
+							<li class="fragment fade-in-then-semi-out">Protecting vital interests of individuals </li>
+							<li class="fragment">In the public interest </li>
+							<li class="fragment">"legitimate interest" </li>
+						</ol>
+					</section>
+					
+					<section>
+						<h3>k-anonymity</h3>
+						<p>A data release provides k-anonymity protection if the information for each person contained in the release cannot be distinguished from at least k-1 individuals whose information also appears in the data. </p>
+						<h2 class="fragment">What is the k-anonymity of the twitter dataset you worked on last week? </h2>
+						<p class="fragment">Altogether the dataset has 1-anonymity because each tweet consist of a unique text, so none of the tweets have exactly the same values for all variables. </p>
+						<ul>
+							<li class="fragment">Supression: Remove certain identifiable variables or values. </li>
+							<li class="fragment">Generalisation: Replace values with broader categories.  </li>
+						</ul>
+					</section>
+					<section>
+						<table>
+<tbody><tr>
+<th>Name</th>
+<th>Age</th>
+<th>Gender</th>
+<th>State of domicile</th>
+<th>Religion</th>
+<th>Disease
+</th></tr>
+<tr>
+<td>Ramsha</td>
+<td>30</td>
+<td>Female</td>
+<td>Tamil Nadu</td>
+<td>Hindu</td>
+<td>Cancer</td></tr>
+<tr>
+<td>Yadu</td>
+<td>24</td>
+<td>Female</td>
+<td>Kerala</td>
+<td>Hindu</td>
+<td>Viral infection</td></tr>
+<tr>
+<td>Salima</td>
+<td>28</td>
+<td>Female</td>
+<td>Tamil Nadu</td>
+<td>Muslim</td>
+<td>TB</td></tr>
+<tr>
+<td>Sunny</td>
+<td>27</td>
+<td>Male</td>
+<td>Karnataka</td>
+<td>Parsi</td>
+<td>No illness
+</td></tr>
+<tr>
+<td>Joan</td>
+<td>24</td>
+<td>Female</td>
+<td>Kerala</td>
+<td>Christian</td>
+<td>Heart-related</td></tr>
+<tr>
+<td>Bahuksana</td>
+<td>23</td>
+<td>Male</td>
+<td>Karnataka</td>
+<td>Buddhist</td>
+<td>TB</td></tr>
+<tr>
+<td>Rambha</td>
+<td>19</td>
+<td>Male</td>
+<td>Kerala</td>
+<td>Hindu</td>
+<td>Cancer
+</td></tr>
+<tr>
+<td>Kishor</td>
+<td>29</td>
+<td>Male</td>
+<td>Karnataka</td>
+<td>Hindu</td>
+<td>Heart-related
+</td></tr>
+<tr>
+<td>Johnson</td>
+<td>17</td>
+<td>Male</td>
+<td>Kerala</td>
+<td>Christian</td>
+<td>Heart-related
+</td></tr>
+<tr>
+<td>John</td>
+<td>19</td>
+<td>Male</td>
+<td>Kerala</td>
+<td>Christian</td>
+<td>Viral infection
+</td></tr></tbody>
+						</table>
+					</section>
+					<section>
+						<p>Dataset with 2-anonymity with respect to "age", "gender" and "state of domicile": </p>
+						<table>
+
+<tbody><tr>
+<th>Name</th>
+<th>Age</th>
+<th>Gender</th>
+<th>State of domicile</th>
+<th>Religion</th>
+<th>Disease
+</th></tr>
+<tr>
+<td>*</td>
+<td>20 &lt; Age ≤ 30</td>
+<td>Female</td>
+<td>Tamil Nadu</td>
+<td>*</td>
+<td>Cancer
+</td></tr>
+<tr>
+<td>*</td>
+<td>20 &lt; Age ≤ 30</td>
+<td>Female</td>
+<td>Kerala</td>
+<td>*</td>
+<td>Viral infection
+</td></tr>
+<tr>
+<td>*</td>
+<td>20 &lt; Age ≤ 30</td>
+<td>Female</td>
+<td>Tamil Nadu</td>
+<td>*</td>
+<td>TB
+</td></tr>
+<tr>
+<td>*</td>
+<td>20 &lt; Age ≤ 30</td>
+<td>Male</td>
+<td>Karnataka</td>
+<td>*</td>
+<td>No illness
+</td></tr>
+<tr>
+<td>*</td>
+<td>20 &lt; Age ≤ 30</td>
+<td>Female</td>
+<td>Kerala</td>
+<td>*</td>
+<td>Heart-related
+</td></tr>
+<tr>
+<td>*</td>
+<td>20 &lt; Age ≤ 30</td>
+<td>Male</td>
+<td>Karnataka</td>
+<td>*</td>
+<td>TB
+</td></tr>
+<tr>
+<td>*</td>
+<td>Age ≤ 20</td>
+<td>Male</td>
+<td>Kerala</td>
+<td>*</td>
+<td>Cancer
+</td></tr>
+<tr>
+<td>*</td>
+<td>20 &lt; Age ≤ 30</td>
+<td>Male</td>
+<td>Karnataka</td>
+<td>*</td>
+<td>Heart-related
+</td></tr>
+<tr>
+<td>*</td>
+<td>Age ≤ 20</td>
+<td>Male</td>
+<td>Kerala</td>
+<td>*</td>
+<td>Heart-related
+</td></tr>
+<tr>
+<td>*</td>
+<td>Age ≤ 20</td>
+<td>Male</td>
+<td>Kerala</td>
+<td>*</td>
+<td>Viral infection
+</td></tr></tbody>
+						</table>
+					</section>
+					<section>
+						<h3>Calculating the k-anonymity of a data set. </h3>
+						<p>A data release provides k-anonymity protection if the information for each person contained in the release cannot be distinguished from at least k-1 individuals whose information also appears in the data. </p>
+						<p class="fragment">So essentially we need to find all the unique combinations of values in our dataset and calculate how many times each of these combinations occur. </p>
+						<p class="fragment">The uniqe combination of all answers that occurs the least times are then our k-anonymity. </p>
+						<p class="fragment">This is the minimum number of records/respondents that have exactly identical values to each other. </p>
+					</section>
+					<section>
+						<h3>Extracting all unique combinations of values in data set: </h3>
+						<pre><code class ="r hljs fragment" data-trim data-noescape>
+> unique(df)
+         Age Gender       SofD         Disease
+1  20-Age-30 Female Tamil Nadu          Cancer
+2  20-Age-30 Female     Kerala Viral Infection
+3  20-Age-30 Female Tamil Nadu              TB
+4  20-Age-30   Male  Karnataka      No illness
+5  20-Age-30 Female     Kerala   Heart-related
+6  20-Age-30   Male  Karnataka              TB
+7     Age-20   Male     Kerala          Cancer
+8  20-Age-30   Male  Karnataka   Heart-related
+9     Age-20   Male     Kerala   Heart-related
+10    Age-20   Male     Kerala Viral Infection
+<span class="fragment">
+> unique(df[,1:3])</span>
+<span class="fragment">        Age Gender       SofD
+1 20-Age-30 Female Tamil Nadu
+2 20-Age-30 Female     Kerala
+4 20-Age-30   Male  Karnataka
+7    Age-20   Male     Kerala
+</span>
+						</code></pre>
+					</section>
+					<section>
+						<h3>Counting the frequency of each unique combination of values in data set: </h3>
+						<p class="fragment">Can be done with the methods you know, but much easier with the "plyr" package. So if you do not already have it you need to install this first: </p>
+						<pre><code class="r hljs fragment" data-trim data-noescape>
+> install.packages("plyr")
+						</code></pre>
+						<pre><code class="r hljs fragment" data-trim data-noescape>
+> library(plyr)
+<span class="fragment">> count(df[,1:3])
+        Age Gender       SofD freq
+1 20-Age-30 Female     Kerala    2
+2 20-Age-30 Female Tamil Nadu    2
+3 20-Age-30   Male  Karnataka    3
+4    Age-20   Male     Kerala    3</span>
+<span class="fragment">> dfUnique <- count(df[,1:3])</span>
+<span class="fragment">> min(dfUnique$freq)
+[1] 2</span>
+						</code></pre>					
+					</section>
+				</section>
+				
+				
+				<section>
+					<h1 style="color: rgb(0,101,189)">Research Ethics </h1>
+					<p class="fragment">Not only relevant to university research! </p>
+					<p class="fragment">Two sides to research ethics: </p>
+					<ol>
+						<li class="fragment">What not to do (to participants) </li>
+						<li class="fragment">What research ought to be done </li>
+					</ol>
+					<p class="fragment">Three approaches (according to Mathew Salganik)</p>
+					<ul>
+						<li class="fragment">Social Science: rules-based approach </li>
+						<li class="fragment">Data Science: ad-hoc approach </li>
+						<li class="fragment">Salganik: principles-based approach </li>
+					</ul>
+					<p><cite style="font-size: small; font-style: italic;">Salganik, M. J. (2017). Bit by Bit: Social Research in the Digital Age. Princeton: Princeton University Press.
+</cite></p>
+				</section>
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)">Specific ethical challenges to computational methods </h3>
+					<p class="fragment">Increased power to <em>observe</em> and <em>enrol participants in experiments</em> without their <em>consent</em> or <em>awareness</em>. </p>
+					<ul>
+						<li class="fragment">Unseen seers (Foucault). </li>
+						<li class="fragment">Unanticipated secondary use. </li>
+						<li class="fragment">Increasing possibilities for researchers to <em>intervene</em> in people's lives. </li>
+					</ul>
+				</section>
+				<section>
+					<h3 style="color: rgb(0,101,189)">Two ethical frameworks </h3>
+					<section>
+						
+					</section>
+					<section>
+						<h2>Consequentialism </h2>
+						<ul>
+							<li class="fragment">Focus on <em>ends</em>: </li>
+							<li class="fragment">Take actions that lead to a better world! </li>
+							<li class="fragment">Main influencers: Jeremy Bentham & John Stuart Mill </li>
+						</ul>
+					</section>
+					<section>
+						<h2>Deontology </h2>
+						<ul>
+							<li class="fragment">Focus on <em>means</em>: </li>
+							<li class="fragment">Always do what is right, independent of the consequences! </li>
+							<li class="fragment">Main influencer: Immanual Kant </li>
+						</ul>
+					</section>
+					<section>
+						<h2>Consequentialism vs. deontology </h2>
+						<ul>
+							<li class="fragment">Despite being fundamentally opposites, </li>
+							<li class="fragment">a blend of both is often most useful. </li>
+							<li class="fragment">But often we emphasise one over the other. </li>
+							<li class="fragment">Good framework to clarify different views on ethics. </li>
+							<li class="fragment">Use them to think about your project from both angles. </li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<h3 style="color: rgb(0,101,189)">Four ethical principles </h3>
+					<section>
+						<p class="fragment">Based on two US reports with guidelines on research ethics: </p>
+						<ul class="fragment">
+							<li>Belmont Report (1979)</li>
+							<li>Menlo Report (2011)</li>
+						</ul>
+						<p class="fragment">Principles are <em>not</em> rules! </p>
+					</section>
+					<section>
+						<h2>Respect for persons</h2>
+						<p class="fragment" data-fragment-index="1">Persons are autonomous </p>
+						<p class="fragment" data-fragment-index="2">⇓</p>
+						<p class="fragment" data-fragment-index="2">Let people control their own lives </p>
+						<p class="fragment" data-fragment-index="3">⇓</p>
+						<p class="fragment" data-fragment-index="3">Informed cconsent </p>
+						<p class="fragment" data-fragment-index="4">⇓</p>
+						<p class="fragment" data-fragment-index="4">Participants and not researchers decide what is best for them </p>
+						<h3 class="fragment">Facebook case: Informed consent? </h3>
+					</section>
+					<section>
+						<h2>Beneficence </h2>
+						<p class="fragment">Maximise possible benefits while minimising possible risks. </p>
+						<ol>
+							<li class="fragment">Understand possible risks/benefits: </li>
+							<ol>
+								<li class="fragment">Probability of adverse effects. </li>
+								<li class="fragment">Severity of possible adverse effects. </li>
+								<li class="fragment">Consider participants as well as non-participants and society. </li>
+							</ol>
+							<li class="fragment">Attempt to improve risk/benefit </li>
+							<ol>
+								<li class="fragment">Reduce probability of adverse effects. </li>
+								<li class="fragment">Reduce severity of adverse effects if they occur. </li>
+								<li class="fragment">Increase benefit of study. </li>
+							</ol>
+							<li class="fragment">Make a decision whether possible benefit is worth the risk: </li>
+							<ol>
+								<li class="fragment">Not a simple summation! </li>
+								<li class="fragment">Not only up to researchers to decide. </li>
+							</ol>
+						</ol>
+					</section>
+					<section>
+						<h2>Justice </h2>
+						<p class="fragment">Fair dsitribution of risks and benefits. </p>
+						<ul>
+							<li class="fragment">Vulnerable groups should be particularly protected. </li>
+							<li class="fragment">Vulnerable people should be explicitly included in research. </li>
+							<li class="fragment">So is random sampling more fair/just? </li>
+							<li class="fragment">Compensation to research participants? </li>
+						</ul>
+					</section>
+					<section>
+						<h2>Respect for Law and Public Interest </h2>
+						<p class="fragment">Specificly added for research on information and communication technologies, and consists of two parrts: </p>
+						<ul>
+							<li class="fragment">Compliance: </li>
+							<ul>
+								<li class="fragment">Comply with laws and regulations, but also terms of service and contracts. </li>
+								<li class="fragment">Particularly complicated in computational methods. </li>
+								<li class="fragment">But do so critically! </li>
+							</ul>
+							<li class="fragment">Transparency-based accountability: </li>
+							<ul>
+								<li class="fragment">Openness about goals, methods, and results. </li>
+								<li class="fragment">-> Makes us accountable for what we do. </li>
+								<li class="fragment">Rule-of-thumb: Would you be comfortable with your research procedures being printed on the front page of your local newspaper? </li>
+							</ul>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<h3 style="color: rgb(0,101,189)">Statistical inference </h3>
+					<section>
+						<p class="fragment">Deducing properties of a population based on a sample. </p>
+						<h3 class="fragment" style="color: rgb(0,101,189)">Statistical significance </h3>
+						<p class="fragment">When a result is unlikely to occur randomly or by chance (but instead likely to be attributable to a specific cause). </p>
+						<h3 class="fragment">Does statistical significance matter when we do not work with sample data? </h3>
+						<p class="fragment">Most often yes! </p>
+					</section>
+					<section>
+						<h3>Hypotheses and null hypotheses</h3>
+						<ul>
+							<li class="fragment">Hypothesis: A testable claim about a statistic (or the relation between more statistics)</li>
+							<li class="fragment">Null hypothesis: A claim that we want to reject in order to test our hypothesis. </li>
+							<li class="fragment">p-value: The likelihood that a null-hypothesis is true (so we want this to be low). </li>
+							<li class="fragment">alpha-level: How unlikely we want the null hypothesis to be in order to reject it (in social sciences usually 0,05) </li>
+						</ul>
+					</section>
+					<section>
+						<h3>Example</h3>
+						<ul>
+							<li class="fragment">Hypothesis: CDU voters tend to be older than SPD voters - mean age of CDU voters > mean age of SPD voters.  </li>
+							<li class="fragment">Null hypothesis: mean age of CDU voters = mean age of SPD voters </li>
+							<li class="fragment">If we ask a <em>random</em> sample of voters about their age and what they voted, we can calculate the mean ages of each group. This is our estimate. </li>
+							<li class="fragment">And then we can calculate how likely we are to get this result, if in fact the mean age of the two groups are the same for the whole population. This is the p-value. </li>
+							<li class="fragment">So if the p-value is less than 0,05 it means that it is less than 5% likely to get our result by taking a random sample of respondents from a population where the mean age of the two groups are actually the same. </li>
+						</ul>
+					</section>
+					<section>
+						<!--Div that will hold the bar chart-->
+						<div id="chart_div"></div>
+					</section>
+					<section>
+						<!--Div that will hold the bar chart-->
+						<div id="chart-ex_div"></div>
+					</section>				
+					<section>
+						<h3>Central Limit Theorem </h3>
+						<iframe data-src="https://gallery.shinyapps.io/CLT_mean/" frameborder="0" style="width:100%;height:1000px;display:block;padding:0;margin:0"></iframe>
+					</section>
+					<section>
+						
+					</section>
+				</section>
+				
+	
+			</div>
+		</div>
+		
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
