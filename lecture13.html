@@ -1,0 +1,434 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>POL40300: Lecture 13</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+		<link rel="stylesheet" href="css/reveal-override.css"/>
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/vs.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<style>
+			kbd {
+				font-family: Arial, sans-serif;
+				font-size: 1rem;
+				padding: 0 .25rem 0 .25rem;
+				border: solid 1px grey;
+				border-radius: 4px;
+				background-color: #f0f0f0;
+				box-shadow: 2px 2px 2px 2px silver;
+			}
+		</style>
+	</head>
+	<body>
+		<header><img src="pic/LogoMainBlue2.png" style="width:100% "></header>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background="pic/BGMainBlue.gif" style="color:white">
+					<h1  style="color:white">POL40300: Computational Methods</h1>
+					<p>Lecture 13 by Nikolai Gad</p>
+					<p>München, 22. January 2020</p>
+				</section>
+				<section>
+					<h3 style="color: rgb(0,101,189)">Today's lecture </h3>
+					<ul>
+						<li>Practicals </li>
+						<li>Exam </li>
+						<li>For loops </li>
+						<li>Subsetting lists in R </li>
+						<li>Statistical significance: Answers to tutorial 10</li>
+						
+					</ul>
+				</section>
+				
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)">Practicals </h3>
+					<section>
+						<h3>Outline of the last couple of weeks </h3>
+						
+					</section>
+					<section>
+						<h3>Exam registration </h3>
+						<ul>
+							<li class="fragment">Three exam groups due to capacity. </li>
+							<li class="fragment">Incorrect cap means that some students will be moved to added exam session. </li>
+							<li class="fragment">These are the three exam sessions (all on Feb 6th 2020): </li>
+							<ul class="fragment">
+								<li>11.30-13.00 </li>
+								<li>13.15-14.45 </li>
+								<li>16.45-18.15 </li>
+							</ul>
+							<li class="fragment">Reassignment to new session will happen randomly later today. </li>
+							<li class="fragment">You should be informed if your exam time has changed, but please check up to make sure! </li>
+						</ul>
+					</section>
+				</section>
+				
+				
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)">The exam </h3>
+					<section>
+						<h3>Practicalities </h3>
+						<ul>
+							<li class="fragment">90 minutes, closed book. </li>
+							<li class="fragment">Three different sets of exam questions (one for each exam group). </li>
+							<li class="fragment">Be early! (at least 20 min before start of exam)</li>
+							<li class="fragment">Two documents to hand in: A written report and an R script. </li>
+							<li class="fragment">Both of these should be handed in, in two formats: Digital and printed. (details will be explained at the exam)</li>
+							<li class="fragment">(the digital version will be marked, but obviously they should be identical) </li>
+							<li class="fragment">Written report can be submitted as a .doc, .docx or .pdf file. </li>
+							<li class="fragment">No Internet or personal notes are allowed! </li>
+						</ul>
+					</section>
+					<section>
+						<h3>Equipment </h3>
+						<ul>
+							<li class="fragment">You will need to use the university comptuers in H.103 </li>
+							<li class="fragment">They have R, Word and all the required R packages installed beforehand. </li>
+							<li class="fragment">A printer will be set up in the room. </li>
+							<li class="fragment">Data for exercises will be made available digitally at the exam. </li>
+							<li class="fragment">Keyboard layout: PC (for mac users) with German and English layout installed (I think) </li>
+							<li class="fragment">Familiarise yourself with the computers by trying to use them in next tutorials. </li>
+						</ul>
+					</section>
+					<section>
+						<h3>Structure of the exam questions </h3>
+						<p>(90 minutes closed book) </p>
+						<ul>
+							<li class="fragment">The exam will consist of two parts: </li>
+							<ol>
+								<li class="fragment">A number of concrete questions/tasks that needs to be answered in one or two paragraphs. </li>
+								<li class="fragment">An open question that requires you to do some (simple) analysis with data provided and write a short report. </li>
+							</ol>
+							<li class="fragment">You can recieve a maximum of 20 points for each part (so 40 points in total)</li>
+							<li class="fragment">And you need 21 points to pass. </li>
+						</ul>
+					</section>
+					<section>
+						<h3>Written report </h3>
+						<ul>
+							<li class="fragment">An open question and some data for you to work with. </li>
+							<li class="fragment">The report should include the following three elements: </li>
+							<ol>
+								<li class="fragment">Description of a research design: How would you explore a specific research question? </li>
+								<li class="fragment">Reporting and interpretation of findings from some (simple) data analysis (of your choice). </li>
+								<li class="fragment">A <em>brief</em> discussion of strengths and weaknesses of your study design. (can be structured as bullet points)</li>
+							</ol>
+							<li class="fragment">Justify your choices! </li>
+							<li class="fragment">Any use of methods from class will satisfy, but more advanced methods will recieve higher marks (if applied correctly). </li>
+							<li class="fragment"><strong>The report should be <em>concise</em> and to the point!</strong> </li>
+							<li class="fragment">(long essay style discussions will not give you an advantage) </li>
+							<li class="fragment">You will not be marked on your writing skills, as long as the points you are making are clear. </li>
+						</ul>
+					</section>
+					<section>
+						<h3>Marking of written report </h3>
+						<table>
+							<tr>
+								<th>Points </th>
+								<th>Description </th>
+							</tr>
+							<tr>
+								<td>20-19</td>
+								<td>Outstanding use of complex methods in a relevant way with no mistakes. </td>
+							</tr>
+							<tr>
+								<td>18-17</td>
+								<td>Very good use of methods and convincing justifications. </td>
+							</tr>
+							<tr>
+								<td>16-15</td>
+								<td>Good use of methods and convincing justifications. </td>
+							</tr>
+							<tr>
+								<td>14-13</td>
+								<td>Good use of methods with no major mistakes. </td>
+							</tr>
+							<tr>
+								<td>12-11</td>
+								<td>Good use of methods, but with some mistakes. </td>
+							</tr>
+							<tr>
+								<td>10-9</td>
+								<td>Satisfactory, but with mistakes and/or incomplete parts. </td>
+							</tr>
+							<tr>
+								<td>0-8</td>
+								<td>Incomplete in substantial parts with essential mistakes. </td>
+							</tr>
+						</table>
+						</br>
+						<ul>
+							<li class="fragment">Important that you include <em>all</em> three parts so your report is not incomplete! </li>
+							<li class="fragment">Use of methods and justifications should be your main focus. </li>
+						</ul>
+					</section>
+					<section>
+						<h3>Exam submission </h3>
+						<p class="fragment">Consists of two documents: </p>
+						<ol>
+							<li class="fragment">A written document: This is where you answer <em>all</em> the exam questions and write your report. </li>
+							<li class="fragment">An R script (.R extension): This is where you document how you have got the results for your answers and written report. </li>
+						</ol>
+					</section>
+					<section>
+						<h3>Exam submission </h3>
+						<p class="fragment">Your R script should: </p>
+						<ul>
+							<li class="fragment">...run from start to end without returning any errors from a fresh R session. </li>
+							<ul>
+								<li class="fragment">So make sure you load all the packages you use in the script (using the library() function)</li>
+								<li class="fragment">And make sure you do not refer to variables you have not defined in the script. </li>
+								<li class="fragment">If you have time, try to delete everything in your environment ( rm(list = ls()) ) and run the whole script before handing in. </li>
+							</ul>
+							<li class="fragment">...be well structured, so it is clear which code is used to answer which questions. </li>
+							<li class="fragment">...include enough comments for the marker to understand what you are trying to do (also in case that is not what you actually do). </li>
+						</ul>
+					</section>
+					<section>
+						<h3>Marking scheme </h3>
+						<img src="pic/lecture13/MarkingScale.png" />
+					</section>
+				</section>
+				
+				
+				
+				
+				
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)">Help options in R </h3>
+					<section>
+						<h3>Help file for each function </h3>
+						<ul>
+							<li class="fragment">If you do not remember what a function does or which input it takes. </li>
+							<li class="fragment">Access by typiing ?functionName, help(functionName) or typing the function name in RStudio and press F1. </li>
+							<li class="fragment">Or use search bar in R studio's help pane. </li>
+							<li class="fragment">Illustration: sum()</li>
+							<li class="fragment">Use the example() function to show examples. </li>
+						</ul>
+					</section>
+					<section>
+						<h3>Finding the name of a function </h3>
+						<ul>
+							<li class="fragment">Use search function in RStudio's help pane: Unfortunately you can only search one word here. </li>
+							<li class="fragment">List all functions from a package: </li>
+							<ul>
+								<li class="fragment">Package name + :: and tab in RStudio. </li>
+								<li class="fragment">help(package = "packageName")</li>
+							</ul>
+							<li class="fragment">Searching for help in R: Also use help.search("searc string") (but doesn't always work well) </li>
+							<li class="fragment">Use help.start() to get a list of all packages and help files installed. </li>
+						</ul>
+					</section>
+				</section>
+				
+				
+				
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)">Recapping a few R functionalities </h3>
+					<section>
+						<h3>For loops</h3>
+						<p class="fragment">In the last two weeks you have had to use for loops to repeat the same task many time, so let us just go through the syntax of a typical for loop: </p>
+						<pre><code class ="r hljs fragment" data-trim data-noescape>
+> for(i in 1:5) {
+	print(1:i)
+}
+[1] 1
+[1] 1 2
+[1] 1 2 3
+[1] 1 2 3 4
+[1] 1 2 3 4 5
+						</code></pre>
+					</section>
+					<section>
+						<h3>Looping through a vector </h3>
+						<p class="fragment">So we can use this to loop through all the values of a vector (for example a vector consisting of url's) </p>
+						<pre><code class ="r hljs fragment" data-trim data-noescape>
+vecEx <- c("url1", "url2", "url3")
+<span class="fragment">
+> for (i in 1:length(vecEx)) {
++   print(vecEx[i])
++ }
+[1] "url1"
+[1] "url2"
+[1] "url3" </span>
+						</code></pre>
+						<p class="fragment">Instead of just printing out the values of each element of the vector, we would typically do some computation with these values. </p>
+					</section>
+					<section>
+						<h3>Save results from each loop in a variable. </h3>
+						<p class="fragment">Often we want to save some result from the calculation the loop performs for each circulation of the loop. </p>
+						<p class="fragment">To do that, we need to <em>initiate</em> the variable we want to save the results in before running the loop; typically a vector, data frame or list. </p>
+						<p class="fragment">That means we create an empty variable (vector/data frame/list) where we can save the results in: </p>
+						<pre><code class ="r hljs fragment" data-trim data-noescape>
+> results <- c()
+<span class="fragment">
+> for (i in 1:length(vecEx)) {
++   n <- str_c(vecEx[i], " is a link. ")
++   results[i] <- n
++ }
+</span><span class="fragment">
+> results
+[1] "url1 is a link. " "url2 is a link. " "url3 is a link. "</span>
+						</code></pre>
+					</section>
+					<section>
+						<h3>Sub setting R lists. </h3>
+						<p class="fragment">Sometimes we have lists nested within lists. List of lists, where we want to only select the nth element of each sublist: </p>
+						<pre><code class ="r hljs fragment" data-trim data-noescape>
+> head(summary(listResultECD))
+       Length Class  Mode
+146143 19     -none- list
+273647 19     -none- list
+273564 19     -none- list
+273487 19     -none- list
+273483 19     -none- list
+273237 19     -none- list
+<span class="fragment">
+> summary(listResultECD[[1]])
+                    Length Class      Mode     
+form                1      -none-     character
+title               1      -none-     character
+api_url             1      -none-     character
+eurlex_perma_url    1      -none-     character
+doc_id              1      -none-     character
+date_document       1      -none-     character
+of_effect           1      -none-     character
+end_validity        1      -none-     character
+oj_date             1      -none-     character
+directory_codes     1      data.frame list     
+legal_basis         1      data.frame list     
+addressee           1      -none-     character
+internal_ref        1      -none-     character
+additional_info     1      -none-     character
+text_url            1      -none-     character
+prelex_relation     0      -none-     list     
+relationships       3      data.frame list     
+eurovoc_descriptors 1      data.frame list     
+subject_matter      1      data.frame list  
+</span>
+						</code></pre>
+						
+					</section>
+					<section>
+						<h3>Sub setting R lists. </h3>
+						<p class="fragment">In this case we can use a little trick with the lapply function you encountered last week. </p>
+						<p class="fragment">Imagine we want the 4th elment of each sub list within the list listResultECB: </p>
+						<pre><code class ="r hljs fragment" data-trim data-noescape>
+> lapply(listResultECD, "[[", 4)
+$`146143`
+[1] "http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:22007A0116(01):EN:NOT"
+
+$`273647`
+[1] "http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:32011O0003R(02):EN:NOT"
+
+$`273564`
+[1] "http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:32011D0008(01)R(01):EN:NOT"
+
+$`273487`
+[1] "http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:32010D0022R(01):EN:NOT"
+
+$`273483`
+[1] "http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:32010D0015(01):EN:NOT"
+
+$`273237`
+[1] "http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:32004D0012(01)R(01):EN:NOT"
+						</code></pre>
+					</section>
+					<section>
+						<h3>Sub setting R lists. </h3>
+						<p class="fragment">We can also use the name of the element we want to extract from each sub list:  </p>
+						<pre><code class ="r hljs fragment" data-trim data-noescape>
+> lapply(listResultECD, "[[", "title")
+$`146143`
+[1] "Memorandum of Understanding amending the Memorandum of Understanding on a Code of Conduct for the members of the Governing Council"
+
+$`273647`
+[1] "This corrigendum does not concern the English version."
+
+$`273564`
+[1] "This corrigendum does not concern the English version."
+
+$`273487`
+[1] "This corrigendum does not concern the English version."
+
+$`273483`
+[1] "2010/574/EU: Decision of the European Central Bank of 21 September 2010 concerning the administration of EFSF loans to Member States whose currency is the euro (ECB/2010/15)"
+
+$`273237`
+[1] "This corrigendum does not concern the English version."
+						</code></pre>
+					</section>
+				</section>
+				
+				
+				
+				
+				
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)">Statistical inference </h3>
+					<section>
+						<h3>Brief recap</h3>
+						<p class="fragment">Deducing properties of a population based on a sample. </p>
+						<p class="fragment">Ie. describe a whole population based on a sample from that population. </p>
+						<h3 class="fragment" style="color: rgb(0,101,189)">Statistical significance </h3>
+						<p class="fragment">A result is statistically significatnt when it is unlikely to occur randomly or by chance (but instead likely to be attributable to a specific cause). </p>
+						
+					</section>
+					<section>
+						<h3>Hypotheses and null hypotheses</h3>
+						<ul>
+							<li class="fragment">Hypothesis: A testable claim about a statistic (or the relation between more statistics)</li>
+							<li class="fragment">Null hypothesis: A claim that we want to reject in order to test our hypothesis. </li>
+							<li class="fragment">p-value: The likelihood that a null-hypothesis is true (so we want this to be low). </li>
+							<li class="fragment">alpha-level: How unlikely we want the null hypothesis to be in order to reject it (in social sciences usually 0,05) </li>
+						</ul>
+					</section>
+					<section>
+						<h1 style="color: rgb(0,101,189)">Statistical significance: Answers to tutorial 10 </h1>
+					</section>
+				</section>
+		
+				
+				
+	
+			</div>
+		</div>
+		
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
