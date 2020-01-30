@@ -1,0 +1,271 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>POL40300: Tutorial 14</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+		<link rel="stylesheet" href="css/reveal-override.css"/>
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/vs.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<style>
+			kbd {
+				font-family: Arial, sans-serif;
+				font-size: 1rem;
+				padding: 0 .25rem 0 .25rem;
+				border: solid 1px grey;
+				border-radius: 4px;
+				background-color: #f0f0f0;
+				box-shadow: 2px 2px 2px 2px silver;
+			}
+		</style>
+	</head>
+	<body>
+		<header><img src="pic/LogoMainBlue2.png" style="width:100% "></header>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background="pic/BGMainBlue.gif" style="color:white">
+					<h1  style="color:white">POL40300: Computational Methods</h1>
+					<p>Tutorial 14 by Nikolai Gad</p>
+					<p>München, 30. January 2020</p>
+				</section>
+				<section>
+					<h3 style="color: rgb(0,101,189)">Today's lecture </h3>
+					<ul>
+						<li>Feedback on last week's tutorial </li>
+						<ul>
+							<li>Discussion of your ideas for analysis. </li>
+						</ul>
+						<li>Exam structure </li>
+						<li>Example exam quesitons </li>
+						<li>Question about R and tutorials? </li>
+						
+					</ul>
+				</section>
+				
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)">Last week's tutorial. </h3>
+					<section>
+						<h3>First part: Collect the data! </h3>
+						<p>Let us go through example answer, which is also available on Moodle. </p>
+					</section>
+					<section>
+						<h3>Second part: Come up with a simple research quesiton and analyse it. </h3>
+						<p class="fragment">Remember that for the exam you will have to write a similar report. </p>
+						<ul class="fragment">
+							<li>An open question and some data for you to work with. </li>
+							<li>The report should include the following three elements: </li>
+							<ol>
+								<li>Description of a research design: How would you explore a specific research question? </li>
+								<li>Reporting and interpretation of findings from some (simple) data analysis (of your choice). </li>
+								<li>A <em>brief</em> discussion of strengths and weaknesses of your study design. (can be structured as bullet points)</li>
+							</ol>
+							<li>Justify your choices! </li>
+							<li>Any use of methods from class will satisfy, but more advanced methods will recieve higher marks (if applied correctly). </li>
+							<li><strong>The report should be <em>concise</em> and to the point!</strong> </li>
+							<li>(long essay style discussions will not give you an advantage) </li>
+							<li>You will not be marked on your writing skills, as long as the points you are making are clear. </li>
+						</ul>
+					</section>
+					<section>
+						<h3>Marking of written report </h3>
+						<table>
+							<tr>
+								<th>Points </th>
+								<th>Description </th>
+							</tr>
+							<tr>
+								<td>20-19</td>
+								<td>Outstanding use of complex methods in a relevant way with no mistakes. </td>
+							</tr>
+							<tr>
+								<td>18-17</td>
+								<td>Very good use of methods and convincing justifications. </td>
+							</tr>
+							<tr>
+								<td>16-15</td>
+								<td>Good use of methods and convincing justifications. </td>
+							</tr>
+							<tr>
+								<td>14-13</td>
+								<td>Good use of methods with no major mistakes. </td>
+							</tr>
+							<tr>
+								<td>12-11</td>
+								<td>Good use of methods, but with some mistakes. </td>
+							</tr>
+							<tr>
+								<td>10-9</td>
+								<td>Satisfactory, but with mistakes and/or incomplete parts. </td>
+							</tr>
+							<tr>
+								<td>0-8</td>
+								<td>Incomplete in substantial parts with essential mistakes. </td>
+							</tr>
+						</table>
+						</br>
+						<ul>
+							<li class="fragment">Important that you include <em>all</em> three parts so your report is not incomplete! </li>
+							<li class="fragment">Use of methods and justifications should be your main focus. </li>
+						</ul>
+					</section>
+					<section>
+						<h1>Your answers to last week's exercise?</h1>
+						
+					</section>
+				</section>
+				
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)">Exam structure </h3>
+					
+					<section>
+						<h3>90 minutes closed book </h3>
+						<ul>
+							<li class="fragment">The exam will consist of two parts: </li>
+							<ol>
+								<li class="fragment">A number of concrete questions/tasks that needs to be answered in one or two paragraphs. </li>
+								<li class="fragment">An open question that requires you to do some (simple) analysis with data provided and write a short report. </li>
+							</ol>
+							<li class="fragment">You can recieve a maximum of 20 points for each part (so 40 points in total)</li>
+							<li class="fragment">And you need 21 points to pass. </li>
+						</ul>
+					</section>
+					<section>
+						<h3>Exam submission </h3>
+						<p class="fragment">Consists of two documents: </p>
+						<ol>
+							<li class="fragment">A written document: This is where you answer <em>all</em> the exam questions and write your report. </li>
+							<li class="fragment">An R script (.R extension): This is where you document how you have got the results for your answers and written report. </li>
+						</ol>
+					</section>
+					<section>
+						<h3>Marking scheme </h3>
+						<img src="pic/lecture13/MarkingScale.png" />
+					</section>
+				</section>
+				
+				
+				
+				
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)">Exam questions </h3>
+					
+					<section>
+						<h3>Structure</h3>
+						<ul>
+							<li class="fragment">Manage your time well. </li>
+							<li class="fragment">90 minutes in total, 20 points for each part. </li>
+							<li class="fragment">But maybe best idea to spend more time on the report. </li>
+							<li class="fragment">A simple recommedation: 30min/60min. </li>
+						</ul>
+						<p class="fragment">This gives you "1,5min per point". </p>
+						<ul>
+							<li class="fragment">There will be 8-10 questions. </li>
+							<li class="fragment">The exam sheet will state how many points you can get for each question (1,5-4). </li>
+							<li class="fragment">So use this to consider how much time to spend on each quesiton. </li>
+						</ul>
+					</section>
+					<section>
+						<h3>Exam question examples  </h3>
+						<p class="fragment">There will be different types of questions: </p>
+						<ol>
+							<li class="fragment">Theoretical questions. </li>
+							<li class="fragment">Change the code. </li>
+							<li class="fragment">Interpret code output. </li>
+							<li class="fragment">Methodological quesitons. </li>
+						</ol>
+						<p class="fragment">The quesitons can be about anything we have coverede in lectures, tutorials, or readings during the course. (see also slides from yesterday's lecture for an overview of <em>some</em> of the key concepts. </p>
+					</section>
+					<section>
+						<h3>Methodological question example: </h3>
+						<p>There are two basic types of Machine Learning. Imagine you have a dataset, conssiting of tweets from different political campaign groups. You want to give each of these tweets a score on an ideological scale from very left-wing to very right-wing. Which type of Machine Learning would you use? </p>
+						<p><em>(1,5 points)</em></p>
+					</section>
+					<section>
+						<h3>Theoretical question example: </h3>
+						<p>Grimmer and Stewart (2013) describes four principles for computational text analysis. The first of these states that "All quantitative models of language are wrong - but some are useful."</p>
+						<p>Give an example of how computational text analysis can be useful. </p>
+						<p><em>(3 points)</em></p>
+					</section>
+					<section>
+						<h3>"Change the code" question example: </h3>
+						<p>The following piece of R code creates a document-feature-matrix from a corpus, stemming the words and removing punctuation: </p>
+						<pre><code class ="r hljs" data-trim>
+						text_dfm <- dfm(textCorp, stem = TRUE, remove_punct = TRUE)
+						</code></pre>
+						<p>Change the code so that all characters are made lower case in the document-feature-matrix. </p>
+						<p><em>(1 point)</em></p>
+					</section>
+					<section>
+						<h3>"Interpret code output" question example: </h3>
+						<p>A dataset of all inaugural speeches by American presidents is used to compare Obama's speeches to all other presidents. A keyness test gives the following result:</p>
+						<pre><code class ="r hljs" data-trim>
+ObamaKeyn <- textstat_keyness(inaugDfm, c("2009-Obama", "2013-Obama"))
+> head(ObamaKeyn)
+  feature     chi2            p n_target n_reference
+1 journey 82.66625 0.000000e+00        9          13
+2 generat 68.92738 1.110223e-16       16          58
+3     job 58.28058 2.275957e-14        7          11
+4   storm 52.37212 4.591882e-13        5           5
+5   creed 50.22949 1.367795e-12        6           9
+6      us 48.82995 2.791434e-12       44         434
+						</code></pre>
+						<p>Which of these most <em>key</em> words, are used the most by Obama? </p>
+						<p><em>(1 point)</em></p>
+					</section>
+					<section>
+						<h3>Open question example: </h3>
+						<p>Imagine a study where you need a measure the attitudes of different politicians toward public spending. Describe one advantage and one disadvantage of using social media posts from each politican to measure this? </p>
+						<p><em>(3 points)</em></p>
+					</section>
+				</section>
+				
+				
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)">Any final questions about R or tutorials? </h3>
+				</section>
+				
+				
+		
+				
+				
+	
+			</div>
+		</div>
+		
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
