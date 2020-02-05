@@ -1,0 +1,460 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>POL40300: Lecture 15</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+		<link rel="stylesheet" href="css/reveal-override.css"/>
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/vs.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<style>
+			kbd {
+				font-family: Arial, sans-serif;
+				font-size: 1rem;
+				padding: 0 .25rem 0 .25rem;
+				border: solid 1px grey;
+				border-radius: 4px;
+				background-color: #f0f0f0;
+				box-shadow: 2px 2px 2px 2px silver;
+			}
+		</style>
+	</head>
+	<body>
+		<header><img src="pic/LogoMainBlue2.png" style="width:100% "></header>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background="pic/BGMainBlue.gif" style="color:white">
+					<h1  style="color:white">POL40300: Computational Methods</h1>
+					<p>Lecture 15 by Nikolai Gad</p>
+					<p>München, 5. February 2020</p>
+				</section>
+				<section>
+					<h3 style="color: rgb(0,101,189)">Today's lecture </h3>
+					<ul>
+						<li>Practicals </li>
+						<li>Questions you send me. </li>
+						<li>any other questions. </li>
+						
+					</ul>
+				</section>
+				
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)">Practicals </h3>
+					<section>
+						<p>(This is literally just a copyt of the slide from last week) </p>
+						<h3>Next week: Q&A session </h3>
+						<p class="fragment">Send your questions by <strong>Friday 12.00</strong>, so I can prepare answers. </p>
+						<p class="fragment">But feel free to bring questions on the day too. </p>
+					</section>
+					<section>
+						<h3>Exam sessions </h3>
+						<h3 class="fragment">The exam is tomorrow!!</h3>
+						<ul>
+							<li>These are the three exam sessions: </li>
+							<ul>
+								<li>11.30-13.00 </li>
+								<li>13.15-14.45 </li>
+								<li>16.45-18.15 </li>
+							</ul>
+							<li class="fragment">Arrive early. </li>
+						</ul>
+						<h2 class="fragment">Check your exam time! </h2>
+					</section>
+				</section>				
+				
+				
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)">Sparsity and density </h3>
+					<section>
+						<h3 class="fragment" data-fragment-index="1">Sparse and dense matrices: </h3>
+						<ul class="fragment" data-fragment-index="1">
+							<li>Sparse matrix: Most elements equal zero. </li>
+							<li>Dense matrix: Most elements have non-zero values. </li>
+						</ul>
+						<p></p>
+						<h3 class="fragment" data-fragment-index="2">Sparsity and density: </h3>
+						<ul>
+							<li class="fragment">Sparsity of a matrix: The proportion of cells that equals zero. </li>
+							<li class="fragment">Density of a matrix: The proportion of cells that does not equal zero. </li>
+						</ul>
+						<p class="fragment">So a sparse matrix has a sparsity above 0.5, which is the same as a density below 0,5. </p>
+					</section>
+					<section>
+						<h3>Sparsity/density of a document-feature-dataframe </h3>
+						<p class="fragment">The density of a document-feature-matrix can be interpreted as the proportion of text documents from the corpus in which each feature/token on average occur. </p>
+						<p class="fragment">So in a document-feature-matrix with a sparsity of 82%, each feature/token on average occur in 18% of the text documents. </p>
+						<p class="fragment">Or it can also be interpreted as the proportion of all the features/tokens in the corpus that occure in each text document. </p>
+						<p class="fragment">So in a document-feature-matrix with a sparsity of 82%, on average 18% of all the features/tokens in the whole corpus are used in each text document. </p>
+						<h3 class="fragment">The sparsity/density indicates to what extent documents in a corpus tends to be made up of the same tokens. </h3>
+						<p class="fragment">But by their nature most document-feature-matrices will be sparse. <p>
+					</section>
+				</section>
+				
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)">k-anonymity </h3>
+					<section>
+						<h3>k-anonymity</h3>
+						<p>A data release provides k-anonymity protection if the information for each person contained in the release cannot be distinguished from at least k-1 individuals whose information also appears in the data. </p>
+						<h2 class="fragment">What is the k-anonymity of the twitter dataset you worked on last week? </h2>
+						<p class="fragment">Altogether the dataset has 1-anonymity because each tweet consist of a unique text, so none of the tweets have exactly the same values for all variables. </p>
+						<ul>
+							<li class="fragment">Supression: Remove certain identifiable variables or values. </li>
+							<li class="fragment">Generalisation: Replace values with broader categories.  </li>
+						</ul>
+					</section>
+					<section>
+						<table>
+<tbody><tr>
+<th>Name</th>
+<th>Age</th>
+<th>Gender</th>
+<th>State of domicile</th>
+<th>Religion</th>
+<th>Disease
+</th></tr>
+<tr>
+<td>Ramsha</td>
+<td>30</td>
+<td>Female</td>
+<td>Tamil Nadu</td>
+<td>Hindu</td>
+<td>Cancer</td></tr>
+<tr>
+<td>Yadu</td>
+<td>24</td>
+<td>Female</td>
+<td>Kerala</td>
+<td>Hindu</td>
+<td>Viral infection</td></tr>
+<tr>
+<td>Salima</td>
+<td>28</td>
+<td>Female</td>
+<td>Tamil Nadu</td>
+<td>Muslim</td>
+<td>TB</td></tr>
+<tr>
+<td>Sunny</td>
+<td>27</td>
+<td>Male</td>
+<td>Karnataka</td>
+<td>Parsi</td>
+<td>No illness
+</td></tr>
+<tr>
+<td>Joan</td>
+<td>24</td>
+<td>Female</td>
+<td>Kerala</td>
+<td>Christian</td>
+<td>Heart-related</td></tr>
+<tr>
+<td>Bahuksana</td>
+<td>23</td>
+<td>Male</td>
+<td>Karnataka</td>
+<td>Buddhist</td>
+<td>TB</td></tr>
+<tr>
+<td>Rambha</td>
+<td>19</td>
+<td>Male</td>
+<td>Kerala</td>
+<td>Hindu</td>
+<td>Cancer
+</td></tr>
+<tr>
+<td>Kishor</td>
+<td>29</td>
+<td>Male</td>
+<td>Karnataka</td>
+<td>Hindu</td>
+<td>Heart-related
+</td></tr>
+<tr>
+<td>Johnson</td>
+<td>17</td>
+<td>Male</td>
+<td>Kerala</td>
+<td>Christian</td>
+<td>Heart-related
+</td></tr>
+<tr>
+<td>John</td>
+<td>19</td>
+<td>Male</td>
+<td>Kerala</td>
+<td>Christian</td>
+<td>Viral infection
+</td></tr></tbody>
+						</table>
+					</section>
+					<section>
+						<p>Dataset with 2-anonymity with respect to "age", "gender" and "state of domicile": </p>
+						<table>
+
+<tbody><tr>
+<th>Name</th>
+<th>Age</th>
+<th>Gender</th>
+<th>State of domicile</th>
+<th>Religion</th>
+<th>Disease
+</th></tr>
+<tr>
+<td>*</td>
+<td>20 &lt; Age ≤ 30</td>
+<td>Female</td>
+<td>Tamil Nadu</td>
+<td>*</td>
+<td>Cancer
+</td></tr>
+<tr>
+<td>*</td>
+<td>20 &lt; Age ≤ 30</td>
+<td>Female</td>
+<td>Kerala</td>
+<td>*</td>
+<td>Viral infection
+</td></tr>
+<tr>
+<td>*</td>
+<td>20 &lt; Age ≤ 30</td>
+<td>Female</td>
+<td>Tamil Nadu</td>
+<td>*</td>
+<td>TB
+</td></tr>
+<tr>
+<td>*</td>
+<td>20 &lt; Age ≤ 30</td>
+<td>Male</td>
+<td>Karnataka</td>
+<td>*</td>
+<td>No illness
+</td></tr>
+<tr>
+<td>*</td>
+<td>20 &lt; Age ≤ 30</td>
+<td>Female</td>
+<td>Kerala</td>
+<td>*</td>
+<td>Heart-related
+</td></tr>
+<tr>
+<td>*</td>
+<td>20 &lt; Age ≤ 30</td>
+<td>Male</td>
+<td>Karnataka</td>
+<td>*</td>
+<td>TB
+</td></tr>
+<tr>
+<td>*</td>
+<td>Age ≤ 20</td>
+<td>Male</td>
+<td>Kerala</td>
+<td>*</td>
+<td>Cancer
+</td></tr>
+<tr>
+<td>*</td>
+<td>20 &lt; Age ≤ 30</td>
+<td>Male</td>
+<td>Karnataka</td>
+<td>*</td>
+<td>Heart-related
+</td></tr>
+<tr>
+<td>*</td>
+<td>Age ≤ 20</td>
+<td>Male</td>
+<td>Kerala</td>
+<td>*</td>
+<td>Heart-related
+</td></tr>
+<tr>
+<td>*</td>
+<td>Age ≤ 20</td>
+<td>Male</td>
+<td>Kerala</td>
+<td>*</td>
+<td>Viral infection
+</td></tr></tbody>
+						</table>
+					</section>
+					<section>
+						<h3>Calculating the k-anonymity of a data set. </h3>
+						<p>A data release provides k-anonymity protection if the information for each person contained in the release cannot be distinguished from at least k-1 individuals whose information also appears in the data. </p>
+						<p class="fragment">So essentially we need to find all the unique combinations of values in our dataset and calculate how many times each of these combinations occur. </p>
+						<p class="fragment">The uniqe combination of all answers that occurs the least times are then our k-anonymity. </p>
+						<p class="fragment">This is the minimum number of records/respondents that have exactly identical values to each other. </p>
+					</section>
+					<section>
+						<h3>Extracting all unique combinations of values in data set: </h3>
+						<pre><code class ="r hljs fragment" data-trim data-noescape>
+> unique(df)
+         Age Gender       SofD         Disease
+1  20-Age-30 Female Tamil Nadu          Cancer
+2  20-Age-30 Female     Kerala Viral Infection
+3  20-Age-30 Female Tamil Nadu              TB
+4  20-Age-30   Male  Karnataka      No illness
+5  20-Age-30 Female     Kerala   Heart-related
+6  20-Age-30   Male  Karnataka              TB
+7     Age-20   Male     Kerala          Cancer
+8  20-Age-30   Male  Karnataka   Heart-related
+9     Age-20   Male     Kerala   Heart-related
+10    Age-20   Male     Kerala Viral Infection
+<span class="fragment">
+> unique(df[,1:3])</span>
+<span class="fragment">        Age Gender       SofD
+1 20-Age-30 Female Tamil Nadu
+2 20-Age-30 Female     Kerala
+4 20-Age-30   Male  Karnataka
+7    Age-20   Male     Kerala
+</span>
+						</code></pre>
+					</section>
+					<section>
+						<h3>Counting the frequency of each unique combination of values in data set: </h3>
+						<p class="fragment">Can be done with the methods you know, but much easier with the "plyr" package. So if you do not already have it you need to install this first: </p>
+						<pre><code class="r hljs fragment" data-trim data-noescape>
+> install.packages("plyr")
+						</code></pre>
+						<pre><code class="r hljs fragment" data-trim data-noescape>
+> library(plyr)
+<span class="fragment">> count(df[,1:3])
+        Age Gender       SofD freq
+1 20-Age-30 Female     Kerala    2
+2 20-Age-30 Female Tamil Nadu    2
+3 20-Age-30   Male  Karnataka    3
+4    Age-20   Male     Kerala    3</span>
+<span class="fragment">> dfUnique <- count(df[,1:3])</span>
+<span class="fragment">> min(dfUnique$freq)
+[1] 2</span>
+						</code></pre>					
+					</section>
+				</section>
+				
+				
+				
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)">dfm_group function and keyness analysis </h3>
+						<p class="fragment">Using the dfm_group function, we can easily merge text documents that has the same value on one docvar. For instance, we can group together all speeches by the same president:</p>
+						<pre><code class ="r hljs fragment" data-trim data-noescape>
+dfmspeeches <- dfm(data_corpus_inaugural)
+dfmbypresident = dfm_group(dfmspeeches, groups = "FirstName")
+						</code></pre>
+						<p class="fragment">This can make it easy to define target texts in a keyness analysis in some cases: </p>
+						<pre><code class ="r hljs fragment" data-trim data-noescape>
+> Obama_Keyness = textstat_keyness(dfmbypresident, "Barack")
+> head(Obama_Keyness)
+   feature     chi2            p n_target n_reference
+1       we 90.98875 0.000000e+00      130        1609
+2  journey 88.76702 0.000000e+00        9          12
+3      our 68.94311 1.110223e-16      143        2038
+4    creed 66.42421 3.330669e-16        6           6
+5   storms 58.88511 1.676437e-14        3           0
+6 founding 53.20145 3.009815e-13        5           5
+<span class="fragment">
+> Obama_Keyness2 <- textstat_keyness(dfmspeeches, docvars(inaugDfm, "President") == "Obama")
+> head(Obama_Keyness2)
+   feature     chi2            p n_target n_reference
+1       we 90.98875 0.000000e+00      130        1609
+2  journey 88.76702 0.000000e+00        9          12
+3      our 68.94311 1.110223e-16      143        2038
+4    creed 66.42421 3.330669e-16        6           6
+5   storms 58.88511 1.676437e-14        3           0
+6 founding 53.20145 3.009815e-13        5           5</span>
+						</code></pre>
+						<p class="fragment">But it gives the same results and it adds an extra step to the procedure. </p>
+				</section>
+				
+				
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)">Apply functions </h3>
+					<p class="fragment">We have used several functions from the apply family in R: </p>
+					<ul>
+						<li class="fragment"><strong>apply:</strong>Applies a function to either each row or each column of a data frame. </li>
+						<li class="fragment"><strong>tapply:</strong>Applies a function to a variable, depending on the value of another variable in a data frame. </li>
+						<li class="fragment"><strong>lapply:</strong>Applies a function to each element of a list (and always returns a list). </li>
+						<li class="fragment"><strong>(do.call:</strong>Takes a list of arguments as input to a function. <strong>)</strong></li>
+					<p class="fragment">And then there is also...</p>
+						<li class="fragment"><strong>sapply:</strong> ("smart apply") Applies a function to each element of a list, and returns "the most appropriate" data format. </li>
+					</ul>
+				</section>
+				
+				
+				
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)">Your questions </h3>
+					<h2>Do you have any additional questions? </h2>
+				</section>
+				
+				
+				
+				
+				<section>
+					<h3 style="color: rgb(0,101,189)">Overview of R packages </h3>
+					<section>
+						<h3>Packages</h3>
+						<p>Overview also uploaded to Moodle. </p>
+						<ul>
+							<li class="fragment">Base, utils, and stats (all build-in to R) </li>
+							<li class="fragment">stringR</li>
+							<li class="fragment">Quanteda</li>
+							<li class="fragment">readtext</li>
+							<li class="fragment">plyr</li>
+							<li class="fragment">robotstext</li>
+							<li class="fragment">rvest</li>
+							<li class="fragment">(xml2)</li>
+							<li class="fragment">httr</li>
+							<li class="fragment">jsonlite</li>
+						</ul>
+					</section>
+				</section>
+				
+				
+	
+			</div>
+		</div>
+		
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
